@@ -35,8 +35,10 @@ template <typename A, typename BI>
 BI destroy (A& a, BI b, BI e) {
     while (b != e) {
         --e;
-        a.destroy(&*e);}
-    return b;}
+        a.destroy(&*e);
+    }
+    return b;
+}
 
 // ------------------
 // uninitialized_copy
@@ -69,11 +71,15 @@ BI uninitialized_fill (A& a, BI b, BI e, const U& v) {
     try {
         while (b != e) {
             a.construct(&*b, v);
-            ++b;}}
+            ++b;
+        }
+    }
     catch (...) {
         destroy(a, p, b);
-        throw;}
-    return e;}
+        throw;
+    }
+    return e;
+}
 
 // -------
 // my_deque
@@ -429,8 +435,14 @@ class my_deque {
          * <your documentation>
          */
         explicit my_deque (const allocator_type& a = allocator_type()) {
-            //_a = a;
-            //arr_ptr = T*
+            _a = a;
+            arr_ptr = new T*[3];// we initialize standard array of pointers
+            number_of_arrays = 3;
+            for(int i = 0; i < 3; ++i){
+                T* temp = _a.allocate(10);
+                T* temp_end = uninitialized_fill(_a,temp,temp+10,value_type());
+                arr_ptr[i] = temp;                
+            }
             assert(valid());
         }
 
@@ -456,7 +468,13 @@ class my_deque {
          * <your documentation>
          */
         ~my_deque () {
-            // <your code>
+            for(int i = 0; i < number_of_arrays; ++i){
+                T* temp = arr_ptr[i];
+                destroy(_a,temp,temp+10);
+                _a.deallocate(temp,10);
+                
+            }
+            delete[] arr_ptr;
             assert(valid());
         }        
 
