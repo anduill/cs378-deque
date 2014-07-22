@@ -168,3 +168,24 @@ TYPED_TEST(TestDeque, Iterator_2) {
     int five = *(++(x.begin()));
     ASSERT_EQ(5,five);
 }
+
+TYPED_TEST(TestDeque, push_front) {
+    typedef typename TestFixture::deque_type      deque_type;
+    typedef typename TestFixture::allocator_type  allocator_type;
+    typedef typename TestFixture::value_type      value_type;
+    typedef typename TestFixture::size_type       size_type;
+    typedef typename TestFixture::difference_type difference_type;
+    typedef typename TestFixture::pointer         pointer;
+    typedef typename TestFixture::const_pointer   const_pointer;
+    typedef typename TestFixture::reference       reference;
+    typedef typename TestFixture::const_reference const_reference;
+
+    deque_type x;
+    x.push_back(4);
+    x.push_back(5);
+    x.push_front(6);
+    int six_actual = x[0];
+    int four_actual = x[1];
+    ASSERT_EQ(6, six_actual);
+    ASSERT_EQ(4, four_actual);
+}
