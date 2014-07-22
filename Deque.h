@@ -686,7 +686,23 @@ class my_deque {
          * <your documentation>
          */
         void push_front (const_reference v) {
-            // <your code>
+            size_type new_b = _b - 1;
+            if(new_b < 0)
+            {
+                resize(size() + 1, v);
+            }
+
+            else
+            {
+                size_type inner_array_number = _b / INNER_SIZE;
+                size_type inner_array_index = _b % INNER_SIZE;
+
+                T* inner_array = arr_ptr[inner_array_number];
+                T* inner_end = inner_array + inner_array_index;
+                T* inner_position = inner_end - 1;
+                uninitialized_fill(_a, inner_position, inner_end, v);
+                _b = new_b;
+            }
             assert(valid());
         }
         
