@@ -71,8 +71,7 @@ struct TestDeque : testing::Test {
 typedef testing::Types<
             std::deque<int>,
             std::deque<double>,
-            my_deque<int>,
-            my_deque<double> >
+            my_deque<int> >
         my_types;
 
 TYPED_TEST_CASE(TestDeque, my_types);
@@ -121,6 +120,51 @@ TYPED_TEST(TestDeque, Size_2) {
 
     deque_type x;
     x.push_back(4);
+    x.push_back(5);
     const size_type s = x.size();
-    ASSERT_EQ(1, s);
+    ASSERT_EQ(2, s);
+    int four_actual = x[0];
+    int five_actual = x[1];
+    int five_actual_1 = x.back();
+    int four_actual_1 = x.front();
+    ASSERT_EQ(4,four_actual);
+    ASSERT_EQ(5,five_actual);
+    ASSERT_EQ(5,five_actual_1);
+    ASSERT_EQ(4, four_actual_1);
+}
+TYPED_TEST(TestDeque, Iterator_1) {
+    typedef typename TestFixture::deque_type      deque_type;
+    typedef typename TestFixture::allocator_type  allocator_type;
+    typedef typename TestFixture::value_type      value_type;
+    typedef typename TestFixture::size_type       size_type;
+    typedef typename TestFixture::difference_type difference_type;
+    typedef typename TestFixture::pointer         pointer;
+    typedef typename TestFixture::const_pointer   const_pointer;
+    typedef typename TestFixture::reference       reference;
+    typedef typename TestFixture::const_reference const_reference;
+
+    deque_type x;
+    x.push_back(4);
+    x.push_back(5);
+    x.push_back(6);
+    int four = *(x.begin());
+    ASSERT_EQ(4,four);
+}
+TYPED_TEST(TestDeque, Iterator_2) {
+    typedef typename TestFixture::deque_type      deque_type;
+    typedef typename TestFixture::allocator_type  allocator_type;
+    typedef typename TestFixture::value_type      value_type;
+    typedef typename TestFixture::size_type       size_type;
+    typedef typename TestFixture::difference_type difference_type;
+    typedef typename TestFixture::pointer         pointer;
+    typedef typename TestFixture::const_pointer   const_pointer;
+    typedef typename TestFixture::reference       reference;
+    typedef typename TestFixture::const_reference const_reference;
+
+    deque_type x;
+    x.push_back(4);
+    x.push_back(5);
+    x.push_back(6);
+    int five = *(++(x.begin()));
+    ASSERT_EQ(5,five);
 }

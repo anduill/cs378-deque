@@ -129,12 +129,10 @@ class my_deque {
 
         allocator_type _a;
         T** arr_ptr;
-        size_type _l;
-        //size_type d_size;
+        size_type _l;        
         size_type _b;
         size_type _e;
-        size_type number_of_arrays;
-        // <your data>
+        size_type number_of_arrays;        
 
     private:        
 
@@ -190,13 +188,15 @@ class my_deque {
 
             private:                
 
-                // <your data>
+                my_deque* _deque;
+                size_type current_location;
+                bool valid_iterator;
 
             private:                
 
                 bool valid () const {
                     // <your code>
-                    return true;
+                    return valid_iterator;
                 }
 
             public:                
@@ -204,8 +204,15 @@ class my_deque {
                 /**
                  * <your documentation>
                  */
-                iterator (/* <your arguments> */) {
-                    // <your code>
+                iterator (my_deque* p, size_type curr) {
+                    _deque = p;
+                    current_location = curr;                    
+                    if(current_location >= p->_b && current_location < p->_e){
+                        valid_iterator = true;
+                    }                    
+                    else{
+                        valid_iterator = false;
+                    }
                     assert(valid());
                 }
 
@@ -217,11 +224,9 @@ class my_deque {
                 /**
                  * <your documentation>
                  */
-                reference operator * () const {
-                    // <your code>
-                    // dummy is just to be able to compile the skeleton, remove it
-                    static value_type dummy;
-                    return dummy;
+                reference operator * () const {                                        
+
+                    return (*_deque)[current_location - _deque->_b];
                 }                
 
                 /**
@@ -234,9 +239,13 @@ class my_deque {
                 /**
                  * <your documentation>
                  */
-                iterator& operator ++ () {
-                    // <your code>
+                iterator& operator ++ () {                    
                     assert(valid());
+                    ++current_location;
+                    // if(current_location >= _deque->_e){
+                    //     valid_iterator = false;
+                    //     current_location = _deque->_e;
+                    // }
                     return *this;
                 }
 
@@ -439,14 +448,7 @@ class my_deque {
          * <your documentation>
          */
         explicit my_deque (const allocator_type& a = allocator_type()) : _a (a)
-        {
-            /*arr_ptr = new T*[3];// we initialize standard array of pointers
-            number_of_arrays = 3;
-            for(int i = 0; i < 3; ++i){
-                T* temp = _a.allocate(10);
-                T* temp_end = uninitialized_fill(_a,temp,temp+10,value_type());
-                arr_ptr[i] = temp;                
-            }*/
+        {            
             arr_ptr = 0;
             _b = _e = number_of_arrays = _l = 0;
             assert(valid());
@@ -502,10 +504,14 @@ class my_deque {
          * <your documentation>
          */
         reference operator [] (size_type index) {
-            // <your code>
-            // dummy is just to be able to compile the skeleton, remove it
-            static value_type dummy;
-            return dummy;
+            assert(index >= 0);
+            assert(index < size());
+            size_type adjusted_index = _b + index;
+            size_type inner_array_number = adjusted_index / INNER_SIZE;
+            size_type inner_array_index = adjusted_index % INNER_SIZE;
+            T* inner_array = arr_ptr[inner_array_number] + inner_array_index;
+
+            return *inner_array;
         }
 
         /**
@@ -536,10 +542,8 @@ class my_deque {
          * <your documentation>
          */
         reference back () {
-            // <your code>
-            // dummy is just to be able to compile the skeleton, remove it
-            static value_type dummy;
-            return dummy;
+            
+            return (*this)[size()-1];
         }
 
         /**
@@ -554,8 +558,8 @@ class my_deque {
          * <your documentation>
          */
         iterator begin () {
-            // <your code>
-            return iterator(/* <your arguments> */);
+            
+            return iterator(this, _b);
         }
 
         /**
@@ -615,10 +619,7 @@ class my_deque {
          * <your documentation>
          */
         reference front () {
-            // <your code>
-            // dummy is just to be able to compile the skeleton, remove it
-            static value_type dummy;
-            return dummy;
+            return (*this)[0];
         }
 
         /**
