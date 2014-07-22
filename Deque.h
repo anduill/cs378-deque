@@ -19,11 +19,11 @@
 #include <utility>   // !=, <=, >, >=
 
 
-#define INNER_SIZE 10;
+
 // -----
 // using
 // -----
-
+const int INNER_SIZE  = 10;
 using std::rel_ops::operator!=;
 using std::rel_ops::operator<=;
 using std::rel_ops::operator>;
@@ -447,6 +447,7 @@ class my_deque {
                 T* temp_end = uninitialized_fill(_a,temp,temp+10,value_type());
                 arr_ptr[i] = temp;                
             }*/
+            arr_ptr = 0;
             _b = _e = number_of_arrays = _l = 0;
             assert(valid());
         }
@@ -732,10 +733,40 @@ class my_deque {
             else if( s <= _l){
                 size_type extra_size = s - size();
                 size_type new_e = _e + extra_size;
-                //leaping_fill                
+                leaping_fill(_a, _e, new_e, arr_ptr, v);                
             }
             else{
+                size_type size_needed = s - size();
+                size_type num_new_arrs = size_needed / INNER_SIZE + 1;
+                size_type one_sided_num_arrs = std::max(num_new_arrs, 2 * size());
+                num_new_arrs = 2*one_sided_num_arrs + number_of_arrays;
+                T** new_arr_ptr = new T*[number_of_arrays];
 
+                for(int i = 0; i < one_sided_num_arrs; ++i)
+                {                   
+                    T* temp = _a.allocate(INNER_SIZE);
+                    new_arr_ptr[i] = temp;   
+                }
+
+                for(int i = one_sided_num_arrs; i < one_sided_num_arrs + number_of_arrays; ++i)
+                {                    
+                    new_arr_ptr[i] = arr_ptr[i - one_sided_num_arrs];
+                }
+
+                for(int i = one_sided_num_arrs + number_of_arrays; i < num_new_arrs; ++i)
+                {
+                    T* temp = _a.allocate(INNER_SIZE);
+                    new_arr_ptr[i] = temp;   
+                }
+                if(arr_ptr != 0){
+                    delete[] arr_ptr;
+                }                
+                arr_ptr = new_arr_ptr;
+                number_of_arrays = num_new_arrs;
+                _l = number_of_arrays * INNER_SIZE;
+                _b = _b + one_sided_num_arrs;
+                _e = _e + one_sided_num_arrs + size_needed;
+                leaping_fill(_a, _e - size_needed, _e, arr_ptr, v);
             }
             
             assert(valid());
