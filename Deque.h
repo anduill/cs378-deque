@@ -63,6 +63,8 @@ BI uninitialized_copy (A& a, II b, II e, BI x) {
     return x;
 }
 
+
+
 // ------------------
 // uninitialized_fill
 // ------------------
@@ -687,12 +689,53 @@ class my_deque {
         }
         
 
+        void leaping_fill(A& a, size_type b, size_type e, T** arr, const value_type& v){
+            size_type b_array = b / INNER_SIZE;
+            size_type b_index = b % INNER_SIZE;
+
+            size_type e_array = e / INNER_SIZE;
+            size_type e_index = e % INNER_SIZE;
+
+            T* b_array_first = arr[b_array];
+            T* b_begin = b_array_first + b_index;
+
+            if(b_array == e_array)
+            {
+                T* arr_end = b_array_first + e_index;
+                uninitialized_fill(a, b_begin, arr_end, v);  
+            }
+            else
+            {
+                T* b_end = b_array_first + INNER_SIZE;
+                uninitialized_fill(a, b_begin, b_end, v);
+                for(int i = b_array+1; i < e_array; ++i)
+                {
+                    T* current = arr[i];
+                    T* end_curr = current + INNER_SIZE;
+                    uninitialized_fill(a, current, end_curr, v);
+                }
+                T* e_begin = arr[e_array];
+                T* e_end = e_begin + e_index;
+                uninitialized_fill(a, e_begin, e_end, v);
+            }    
+        }
         /**
          * <your documentation>
          */
         void resize (size_type s, const_reference v = value_type()) {
             if(s == size()){
                 return;
+            }
+            if (s < size()){
+
+            }
+            else if( s <= _l){
+                size_type extra_size = s - size();
+                size_type new_e = _e + extra_size;
+                //leaping_fill                
+            }
+            else{
+
             }
             
             assert(valid());
