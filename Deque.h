@@ -18,6 +18,8 @@
 #include <stdexcept> // out_of_range
 #include <utility>   // !=, <=, >, >=
 
+
+#define INNER_SIZE 10;
 // -----
 // using
 // -----
@@ -125,10 +127,10 @@ class my_deque {
 
         allocator_type _a;
         T** arr_ptr;
-        size_type d_capacity;
-        size_type d_size;
-        size_type begin_index;
-        size_type end_index;
+        size_type _l;
+        //size_type d_size;
+        size_type _b;
+        size_type _e;
         size_type number_of_arrays;
         // <your data>
 
@@ -434,31 +436,36 @@ class my_deque {
         /**
          * <your documentation>
          */
-        explicit my_deque (const allocator_type& a = allocator_type()) {
-            _a = a;
-            arr_ptr = new T*[3];// we initialize standard array of pointers
+        explicit my_deque (const allocator_type& a = allocator_type()) : _a (a)
+        {
+            /*arr_ptr = new T*[3];// we initialize standard array of pointers
             number_of_arrays = 3;
             for(int i = 0; i < 3; ++i){
                 T* temp = _a.allocate(10);
                 T* temp_end = uninitialized_fill(_a,temp,temp+10,value_type());
                 arr_ptr[i] = temp;                
-            }
+            }*/
+            _b = _e = number_of_arrays = _l = 0;
             assert(valid());
         }
 
         /**
          * <your documentation>
          */
-        explicit my_deque (size_type s, const_reference v = value_type(), const allocator_type& a = allocator_type()) {
+        explicit my_deque (size_type s, const_reference v = value_type(), const allocator_type& a = allocator_type()) 
+        {
             // <your code>
-            assert(valid());}
+            assert(valid());
+        }
 
         /**
          * <your documentation>
          */
-        my_deque (const my_deque& that) {
+        my_deque (const my_deque& that) 
+        {
             // <your code>
-            assert(valid());}
+            assert(valid());
+        }
 
         // ----------
         // destructor
@@ -649,14 +656,32 @@ class my_deque {
         /**
          * <your documentation>
          */
-        void push_back (const_reference) {
-            // <your code>
-            assert(valid());}
+        void push_back (const_reference v)
+        {
+            size_type new_e = _e + 1;
+            if(new_e >= _l)
+            {
+                resize(size() + 1, v);
+            }
+            else
+            {
+                size_type inner_array_number = _e / INNER_SIZE;
+                size_type inner_array_index = _e % INNER_SIZE;
+
+                T* inner_array = arr_ptr[inner_array_number];
+                T* inner_position = inner_array + inner_array_index;
+                T* inner_end = inner_position + 1;
+                uninitialized_fill(_a, inner_position, inner_end, v);
+                _e = new_e;
+            }
+            
+            assert(valid());
+        }
 
         /**
          * <your documentation>
          */
-        void push_front (const_reference) {
+        void push_front (const_reference v) {
             // <your code>
             assert(valid());
         }
@@ -666,7 +691,10 @@ class my_deque {
          * <your documentation>
          */
         void resize (size_type s, const_reference v = value_type()) {
-            // <your code>
+            if(s == size()){
+                return;
+            }
+            
             assert(valid());
         }
         
@@ -675,8 +703,8 @@ class my_deque {
          * <your documentation>
          */
         size_type size () const {
-            // <your code>
-            return 0;
+            
+            return _e - _b;
         }
         
 
