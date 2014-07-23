@@ -66,7 +66,9 @@ struct TestDeque : testing::Test {
     typedef typename D::pointer         pointer;
     typedef typename D::const_pointer   const_pointer;
     typedef typename D::reference       reference;
-    typedef typename D::const_reference const_reference;};
+    typedef typename D::const_reference const_reference;
+    typedef typename D::iterator        iterator;
+};
 
 typedef testing::Types<
             std::deque<int>,
@@ -301,4 +303,35 @@ TYPED_TEST(TestDeque, clear) {
     ASSERT_EQ(4, x.size());
     ASSERT_EQ(1, x.front());
     ASSERT_EQ(4, x.back());
+}
+TYPED_TEST(TestDeque, equals_1) {
+    typedef typename TestFixture::deque_type      deque_type;
+    typedef typename TestFixture::allocator_type  allocator_type;
+    typedef typename TestFixture::value_type      value_type;
+    typedef typename TestFixture::size_type       size_type;
+    typedef typename TestFixture::difference_type difference_type;
+    typedef typename TestFixture::pointer         pointer;
+    typedef typename TestFixture::const_pointer   const_pointer;
+    typedef typename TestFixture::reference       reference;
+    typedef typename TestFixture::const_reference const_reference;
+    typedef typename TestFixture::iterator        iterator;
+
+    deque_type x;
+    for(int i = 1; i < 5; ++i){
+        x.push_back(i);
+    }
+    
+    deque_type y;
+    for(int i = 1; i < 11; ++i){
+        y.push_back(i);
+    }
+    for(int i = 0; i < 4; ++i){
+        ASSERT_EQ(i+1,x[i]);
+    }
+    x = y;
+    for(int i = 0; i < 10; ++i){
+        ASSERT_EQ(i+1,x[i]);
+    }
+    iterator my_begin = x.begin();
+    ASSERT_EQ(1,*my_begin);
 }
