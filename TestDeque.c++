@@ -139,6 +139,20 @@ TYPED_TEST(TestDeque, Iterator_2) {
    int five = *(++(x.begin()));
    ASSERT_EQ(5,five);
 }
+TYPED_TEST(TestDeque, Iterator_3) {
+    typedef typename TestFixture::deque_type      deque_type;
+    typedef typename TestFixture::iterator        iterator;
+
+    deque_type x;
+    x.push_back(1);
+    x.push_back(2);
+    x.push_back(3);
+    x.push_back(4);
+    x.push_back(5);
+    iterator my_begin = x.begin();
+    my_begin += 2;
+    ASSERT_EQ(3,*my_begin);
+}
 
 TYPED_TEST(TestDeque, push_front) {
     typedef typename TestFixture::deque_type      deque_type;

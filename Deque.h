@@ -244,12 +244,8 @@ class my_deque {
                  * <your documentation>
                  */
                 iterator& operator ++ () {                    
-                    assert(valid());
-                    ++current_location;
-                    // if(current_location >= _deque->_e){
-                    //     valid_iterator = false;
-                    //     current_location = _deque->_e;
-                    // }
+                    assert(valid());                    
+                    current_location += 1;
                     return *this;
                 }
 
@@ -266,8 +262,8 @@ class my_deque {
                 /**
                  * <your documentation>
                  */
-                iterator& operator -- () {
-                    // <your code>
+                iterator& operator -- () {                    
+                    current_location -= 1;
                     assert(valid());
                     return *this;}
 
@@ -285,7 +281,7 @@ class my_deque {
                  * <your documentation>
                  */
                 iterator& operator += (difference_type d) {
-                    // <your code>
+                    current_location += d;
                     assert(valid());
                     return *this;
                 }
@@ -294,7 +290,7 @@ class my_deque {
                  * <your documentation>
                  */
                 iterator& operator -= (difference_type d) {
-                    // <your code>
+                    current_location -= d;
                     assert(valid());
                     return *this;
                 }
