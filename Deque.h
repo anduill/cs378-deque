@@ -647,7 +647,11 @@ class my_deque {
          * <your documentation>
          */
         void pop_back () {
-            // <your code>
+            if(size() > 0){
+                size_type new_e = _e -1;
+                leaping_destroy(_a,new_e,_e,arr_ptr);
+                _e = new_e;
+            }
             assert(valid());
         }
 
@@ -655,7 +659,13 @@ class my_deque {
          * <your documentation>
          */
         void pop_front () {
-            // <your code>
+            
+            if(size() > 0){
+                
+                size_type new_b = _b + 1;
+                leaping_destroy(_a,_b,new_b,arr_ptr);
+                _b = new_b;
+            }
             assert(valid());
         }
         
@@ -664,10 +674,10 @@ class my_deque {
          * <your documentation>
          */
         void push_back (const_reference v)
-        {
+        {            
             size_type new_e = _e + 1;
-
-            if(new_e >= _l)
+            
+            if(new_e > _l)
             {
                 resize(size() + 1, v);
             }
@@ -689,9 +699,9 @@ class my_deque {
         /**
          * <your documentation>
          */
-        void push_front (const_reference v) {
+        void push_front (const_reference v) {            
             int new_b = _b - 1;
-            
+
             if(new_b < 0)
             {
                 push_front_resize(1, v);
@@ -735,8 +745,10 @@ class my_deque {
                 new_arr_ptr[i] = temp;
             }
             size_type new_b = one_sided_num_arrs * INNER_SIZE - s;
-            leaping_fill(_a, new_b, _b, new_arr_ptr, v);
-
+            size_type old_b = _b + one_sided_num_arrs * INNER_SIZE;
+            
+            leaping_fill(_a, new_b, old_b, new_arr_ptr, v);
+            
             if(arr_ptr != 0){
                 delete[] arr_ptr;
             }                
@@ -745,8 +757,8 @@ class my_deque {
             _l = number_of_arrays * INNER_SIZE;
 
             if(new_empty_deque){
-                _b = 0;
-                _e = s;
+                _b = new_b;
+                _e = new_b + s;
                 new_empty_deque = false;
             }
             else{
@@ -754,7 +766,36 @@ class my_deque {
                 _e = _e + one_sided_num_arrs * INNER_SIZE;
             }
         }
+        void leaping_destroy(A& a, size_type b, size_type e, T** arr){
+            
+            size_type b_array = b / INNER_SIZE;
+            size_type b_index = b % INNER_SIZE;
 
+            size_type e_array = e / INNER_SIZE;
+            size_type e_index = e % INNER_SIZE;            
+
+            T* b_array_first = arr[b_array];
+            T* b_begin = b_array_first + b_index;
+
+            if(b_array == e_array){
+                T* arr_end = b_array_first + e_index;
+                destroy(a,b_begin,arr_end);
+            }
+            else
+            {
+                T* b_end = b_array_first + INNER_SIZE;
+                destroy(a, b_begin, b_end);
+                for(int i = b_array+1; i < e_array; ++i)
+                {
+                    T* current = arr[i];
+                    T* end_curr = current + INNER_SIZE;
+                    destroy(a, current, end_curr);
+                }
+                T* e_begin = arr[e_array];
+                T* e_end = e_begin + e_index;
+                destroy(a, e_begin, e_end);
+            }
+        }
         void leaping_fill(A& a, size_type b, size_type e, T** arr, const value_type& v){
             size_type b_array = b / INNER_SIZE;
             size_type b_index = b % INNER_SIZE;
@@ -764,7 +805,7 @@ class my_deque {
 
             T* b_array_first = arr[b_array];
             T* b_begin = b_array_first + b_index;
-
+          
             if(b_array == e_array)
             {
                 T* arr_end = b_array_first + e_index;
@@ -788,17 +829,18 @@ class my_deque {
         /**
          * <your documentation>
          */
-        void resize (size_type s, const_reference v = value_type()) {
+        void resize (size_type s, const_reference v = value_type()) {            
+            
+            size_type special_e = s + _b;
             if(s == size()){
                 return;
             }
             if (s < size()){
 
-            }
-            else if( s <= _l){
-                size_type extra_size = s - _l;
-                size_type new_e = _e + extra_size;
-                leaping_fill(_a, _e, new_e, arr_ptr, v);                
+            }            
+            else if(special_e <= _l){                
+                
+                leaping_fill(_a, _e, special_e, arr_ptr, v);                
             }
             else{
                 size_type size_needed = s - _l;
