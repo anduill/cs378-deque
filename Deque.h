@@ -578,7 +578,10 @@ class my_deque {
          * <your documentation>
          */
         void clear () {
-            // <your code>
+            if(size() > 0){
+                leaping_destroy(_a,_b,_e,arr_ptr);
+                _b = _e = 0;
+            }
             assert(valid());
         }
         
@@ -595,8 +598,8 @@ class my_deque {
          * <your documentation>
          */
         iterator end () {
-            // <your code>
-            return iterator(/* <your arguments> */);
+            
+            return iterator(this, _e);
         }
 
         /**
@@ -636,7 +639,7 @@ class my_deque {
         /**
          * <your documentation>
          */
-        iterator insert (iterator, const_reference) {
+        iterator insert (iterator, const_reference v) {
             // <your code>
             assert(valid());
             return iterator();
