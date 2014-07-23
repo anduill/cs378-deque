@@ -163,8 +163,10 @@ class my_deque {
                  * <your documentation>
                  */
                 friend bool operator == (const iterator& lhs, const iterator& rhs) {
-                    // <your code>
-                    return true;
+                    if(lhs._deque == rhs._deque){
+                        return lhs.current_location == rhs.current_location;
+                    }
+                    return false;
                 }
 
                 /**
@@ -639,10 +641,17 @@ class my_deque {
         /**
          * <your documentation>
          */
-        iterator insert (iterator, const_reference v) {
-            // <your code>
+        iterator insert (iterator iter, const_reference v) {
+            if(iter != this->end()){
+                size_type iterator_pos = iter.current_location;
+                size_type num_elems = _e - iterator_pos;
+                T data_copy = (*this)[iterator_pos];
+            }
+            else{
+                this->push_back(v);
+            }            
             assert(valid());
-            return iterator();
+            return iter;
         }
         
 
