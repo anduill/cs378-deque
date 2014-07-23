@@ -468,9 +468,12 @@ class my_deque {
         /**
          * <your documentation>
          */
-        explicit my_deque (size_type s, const_reference v = value_type(), const allocator_type& a = allocator_type()) 
+        explicit my_deque (size_type s, const_reference v = value_type(), const allocator_type& a = allocator_type()) : _a (a)
         {
-            // <your code>
+            arr_ptr = 0;
+            _b = _e = number_of_arrays = _l = 0;
+            new_empty_deque = true;
+            this->resize(s,v);
             assert(valid());
         }
 
@@ -479,7 +482,10 @@ class my_deque {
          */
         my_deque (const my_deque& that) 
         {
-            // <your code>
+            arr_ptr = 0;
+            _b = _e = number_of_arrays = _l = 0;
+            new_empty_deque = true;
+            *this = that;
             assert(valid());
         }
 
@@ -505,7 +511,11 @@ class my_deque {
          * <your documentation>
          */
         my_deque& operator = (const my_deque& rhs) {
-            // <your code>
+            this->clear();
+            size_type rhs_size = rhs.size();
+            for(size_type i = 0; i < rhs_size; ++i){
+                this->push_back(rhs[i]);
+            }
             assert(valid());
             return *this;
         }
@@ -588,7 +598,7 @@ class my_deque {
         void clear () {
             if(size() > 0){
                 leaping_destroy(_a,_b,_e,arr_ptr);
-                _b = _e = 0;
+                _b = _e = size() / 2;
             }
             assert(valid());
         }
@@ -664,6 +674,7 @@ class my_deque {
             {
                 (*this).push_back(v);
                 return (*this).begin();
+
             }
             size_type iterator_pos = get_current_location(iter) - _b;
 

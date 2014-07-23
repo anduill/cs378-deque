@@ -363,7 +363,6 @@ TYPED_TEST(TestDeque, iterator_erase) {
     ++my_it;
     ++my_it;
     x.erase(my_it);
-    for (int i = 0; i < x.size(); ++i)
-      cout << x[i] << endl;
+
     ASSERT_EQ(4, x.size());
 }
