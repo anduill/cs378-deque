@@ -28,6 +28,7 @@ using std::rel_ops::operator!=;
 using std::rel_ops::operator<=;
 using std::rel_ops::operator>;
 using std::rel_ops::operator>=;
+using namespace std;
 
 // -------
 // destroy
@@ -132,7 +133,8 @@ class my_deque {
         size_type _l;        
         size_type _b;
         size_type _e;
-        size_type number_of_arrays;        
+        size_type number_of_arrays;
+        bool new_empty_deque;
 
     private:        
 
@@ -451,6 +453,7 @@ class my_deque {
         {            
             arr_ptr = 0;
             _b = _e = number_of_arrays = _l = 0;
+            new_empty_deque = true;
             assert(valid());
         }
 
@@ -663,6 +666,7 @@ class my_deque {
         void push_back (const_reference v)
         {
             size_type new_e = _e + 1;
+
             if(new_e >= _l)
             {
                 resize(size() + 1, v);
@@ -678,7 +682,7 @@ class my_deque {
                 uninitialized_fill(_a, inner_position, inner_end, v);
                 _e = new_e;
             }
-            
+
             assert(valid());
         }
 
@@ -686,10 +690,11 @@ class my_deque {
          * <your documentation>
          */
         void push_front (const_reference v) {
-            size_type new_b = _b - 1;
+            int new_b = _b - 1;
+            
             if(new_b < 0)
             {
-                resize(size() + 1, v);
+                push_front_resize(1, v);
             }
 
             else
@@ -703,9 +708,52 @@ class my_deque {
                 uninitialized_fill(_a, inner_position, inner_end, v);
                 _b = new_b;
             }
+            
             assert(valid());
         }
         
+        void push_front_resize(size_type s, const_reference v = value_type()){            
+            size_type num_new_arrs = s / INNER_SIZE + 1;
+            size_type one_sided_num_arrs = std::max(num_new_arrs, 2 * size());
+            num_new_arrs = 2*one_sided_num_arrs + number_of_arrays;
+
+            T** new_arr_ptr = new T*[num_new_arrs];
+            for(int i = 0; i < one_sided_num_arrs; ++i)
+            {
+                T* temp = _a.allocate(INNER_SIZE);
+                new_arr_ptr[i] = temp;
+            }
+
+            for(int i = one_sided_num_arrs; i < one_sided_num_arrs + number_of_arrays; ++i)
+            {
+                new_arr_ptr[i] = arr_ptr[i - one_sided_num_arrs];
+            }
+
+            for(int i = one_sided_num_arrs + number_of_arrays; i < num_new_arrs; ++i)
+            {
+                T* temp = _a.allocate(INNER_SIZE);
+                new_arr_ptr[i] = temp;
+            }
+            size_type new_b = one_sided_num_arrs * INNER_SIZE - s;
+            leaping_fill(_a, new_b, _b, new_arr_ptr, v);
+
+            if(arr_ptr != 0){
+                delete[] arr_ptr;
+            }                
+            arr_ptr = new_arr_ptr;
+            number_of_arrays = num_new_arrs;
+            _l = number_of_arrays * INNER_SIZE;
+
+            if(new_empty_deque){
+                _b = 0;
+                _e = s;
+                new_empty_deque = false;
+            }
+            else{
+                _b = new_b;
+                _e = _e + one_sided_num_arrs * INNER_SIZE;
+            }
+        }
 
         void leaping_fill(A& a, size_type b, size_type e, T** arr, const value_type& v){
             size_type b_array = b / INNER_SIZE;
@@ -748,21 +796,25 @@ class my_deque {
 
             }
             else if( s <= _l){
-                size_type extra_size = s - size();
+                size_type extra_size = s - _l;
                 size_type new_e = _e + extra_size;
                 leaping_fill(_a, _e, new_e, arr_ptr, v);                
             }
             else{
-                size_type size_needed = s - size();
+                size_type size_needed = s - _l;
                 size_type num_new_arrs = size_needed / INNER_SIZE + 1;
+
                 size_type one_sided_num_arrs = std::max(num_new_arrs, 2 * size());
                 num_new_arrs = 2*one_sided_num_arrs + number_of_arrays;
-                T** new_arr_ptr = new T*[number_of_arrays];
+
+                T** new_arr_ptr = new T*[num_new_arrs];
+
 
                 for(int i = 0; i < one_sided_num_arrs; ++i)
                 {                   
                     T* temp = _a.allocate(INNER_SIZE);
-                    new_arr_ptr[i] = temp;   
+                    new_arr_ptr[i] = temp;
+
                 }
 
                 for(int i = one_sided_num_arrs; i < one_sided_num_arrs + number_of_arrays; ++i)
@@ -775,14 +827,23 @@ class my_deque {
                     T* temp = _a.allocate(INNER_SIZE);
                     new_arr_ptr[i] = temp;   
                 }
+
                 if(arr_ptr != 0){
                     delete[] arr_ptr;
                 }                
                 arr_ptr = new_arr_ptr;
                 number_of_arrays = num_new_arrs;
                 _l = number_of_arrays * INNER_SIZE;
-                _b = _b + one_sided_num_arrs;
-                _e = _e + one_sided_num_arrs + size_needed;
+                if(new_empty_deque){
+                    _b = 0;
+                    _e = size_needed;
+                    new_empty_deque = false;
+                }
+                else{
+                    _b = _b + one_sided_num_arrs * INNER_SIZE;
+                    _e = _e + one_sided_num_arrs * INNER_SIZE + size_needed;
+                }
+
                 leaping_fill(_a, _e - size_needed, _e, arr_ptr, v);
             }
             
