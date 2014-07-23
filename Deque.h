@@ -836,7 +836,10 @@ class my_deque {
                 return;
             }
             if (s < size()){
-
+                size_type diff = size() - s;
+                size_type new_e = _e - diff;
+                leaping_destroy(_a,new_e,_e,arr_ptr);
+                _e = new_e;
             }            
             else if(special_e <= _l){                
                 
