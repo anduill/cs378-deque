@@ -190,6 +190,8 @@ class my_deque {
                     return lhs -= rhs;
                 }
 
+                friend size_type my_deque::get_current_location(iterator& iter);
+
             private:                
 
                 my_deque* _deque;
@@ -298,6 +300,8 @@ class my_deque {
                     assert(valid());
                     return *this;
                 }
+
+                
             };
 
     public:        
@@ -448,6 +452,8 @@ class my_deque {
 
     public:        
 
+
+
         /**
          * <your documentation>
          */
@@ -542,7 +548,7 @@ class my_deque {
             return const_cast<my_deque*>(this)->at(index);
         }
         
-
+        
         /**
          * <your documentation>
          */
@@ -637,15 +643,31 @@ class my_deque {
             return const_cast<my_deque*>(this)->front();
         }
         
-
+        size_type get_current_location(iterator& iter)
+        {
+            return iter.current_location;
+        }
         /**
          * <your documentation>
          */
         iterator insert (iterator iter, const_reference v) {
-            if(iter != this->end()){
-                size_type iterator_pos = iter.current_location;
-                size_type num_elems = _e - iterator_pos;
-                T data_copy = (*this)[iterator_pos];
+            //AT THE MOMENT, ASSUMING NOT FULL
+            size_type iterator_pos = get_current_location(iter) - _b;
+            cout << "iterator_pos :" << iterator_pos << endl;
+            ++_e;
+            cout << "_e : " << _e - _b << endl;
+            if(iterator_pos != _l)
+            {
+                size_type iterator_end = _e - _b;
+                for (int i = iterator_end; i >= iterator_pos; --i)
+                {
+                    cout << "IN LOOP" << endl;
+                    cout << "i : " << i << endl;
+                    //(*this)[i + 1] = (*this)[i];
+                }
+                cout << "OUT OF LOOP" << endl;
+                (*this)[iterator_pos] = v;
+                _e = iterator_end + 2;
             }
             else{
                 this->push_back(v);
