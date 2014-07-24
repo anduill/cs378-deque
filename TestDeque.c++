@@ -267,9 +267,6 @@ TYPED_TEST(TestDeque, iterator_insert) {
     ++my_it;
     x.insert(my_it, 5);
 
-    for (int i = 0; i < x.size(); ++i)
-      cout << x[i] << endl;
-
     ASSERT_EQ(5, x.size());
 }
 
