@@ -603,6 +603,63 @@ TYPED_TEST(TestDeque, end) {
     ASSERT_EQ(5, *my_it);
 }
 
+TYPED_TEST(TestDeque, test_lots_of_stuff) {
+    typedef typename TestFixture::deque_type      deque_type;  
+    typedef typename TestFixture::const_reference const_reference;
+    typedef typename TestFixture::reference       reference;
+    typedef typename TestFixture::iterator        iterator;
+
+
+
+    deque_type x;
+    
+    x.push_front(1);
+    x.push_back(2);
+    x.push_back(3);
+    x.push_back(4);
+    x.push_back(5);
+
+    for (int i = 0; i < 500; ++i)
+        x.push_front(6);
+
+    for (int i = 0; i < 500; ++i)
+        x.push_back(7);
+
+    
+    iterator my_it = x.begin();
+    ++my_it;
+
+    x.insert(my_it, 8);
+}
+
+TYPED_TEST(TestDeque, beginning) {
+    typedef typename TestFixture::deque_type      deque_type;  
+    typedef typename TestFixture::const_reference const_reference;
+    typedef typename TestFixture::reference       reference;
+    typedef typename TestFixture::iterator        iterator;
+
+
+
+    deque_type x;
+    
+    x.push_front(1);
+    x.push_back(2);
+    x.push_back(3);
+    x.push_back(4);
+    x.push_back(5);
+
+    for (int i = 0; i < 500; ++i)
+        x.push_front(7);
+
+    for (int i = 0; i < 1000; ++i)
+        x.push_back(9);
+
+    iterator my_it = x.begin();
+
+    x.insert(my_it, 8);
+
+    ASSERT_EQ(1506, x.size());
+}
 TYPED_TEST(TestDeque, test_assignment) {
     typedef typename TestFixture::deque_type      deque_type;      
 

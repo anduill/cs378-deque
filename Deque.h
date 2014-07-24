@@ -665,14 +665,18 @@ class my_deque {
                 return (*this).begin();
 
             }
+
             size_type iterator_pos = get_current_location(iter) - _b;
 
 
-            my_deque copy;
+            my_deque copy(size() - iterator_pos, v);
+            copy.clear();
+
             for (int i = iterator_pos; i < size(); ++i)
             {
                 copy.push_back((*this)[i]);
             }
+
 
             resize(iterator_pos, v);
             (*this).push_back(v);
@@ -767,6 +771,7 @@ class my_deque {
             size_type one_sided_num_arrs = std::max(num_new_arrs, 2 * size());
             num_new_arrs = 2*one_sided_num_arrs + number_of_arrays;
 
+            //T** new_arr_ptr = 
             T** new_arr_ptr = new T*[num_new_arrs];
             for(int i = 0; i < one_sided_num_arrs; ++i)
             {
