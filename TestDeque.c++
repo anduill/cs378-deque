@@ -244,14 +244,6 @@ TYPED_TEST(TestDeque, clear) {
 
 TYPED_TEST(TestDeque, iterator_insert) {
     typedef typename TestFixture::deque_type      deque_type;
-    typedef typename TestFixture::allocator_type  allocator_type;
-    typedef typename TestFixture::value_type      value_type;
-    typedef typename TestFixture::size_type       size_type;
-    typedef typename TestFixture::difference_type difference_type;
-    typedef typename TestFixture::pointer         pointer;
-    typedef typename TestFixture::const_pointer   const_pointer;
-    typedef typename TestFixture::reference       reference;
-    typedef typename TestFixture::const_reference const_reference;
     typedef typename TestFixture::iterator        iterator;
 
     deque_type x;
@@ -380,14 +372,6 @@ TYPED_TEST(TestDeque, test_less_than) {
 
 TYPED_TEST(TestDeque, iterator_insert_empty) {
     typedef typename TestFixture::deque_type      deque_type;
-    typedef typename TestFixture::allocator_type  allocator_type;
-    typedef typename TestFixture::value_type      value_type;
-    typedef typename TestFixture::size_type       size_type;
-    typedef typename TestFixture::difference_type difference_type;
-    typedef typename TestFixture::pointer         pointer;
-    typedef typename TestFixture::const_pointer   const_pointer;
-    typedef typename TestFixture::reference       reference;
-    typedef typename TestFixture::const_reference const_reference;
     typedef typename TestFixture::iterator        iterator;
 
     deque_type x;
@@ -601,9 +585,7 @@ TYPED_TEST(TestDeque, const_equals_2) {
 }
 
 TYPED_TEST(TestDeque, end) {
-    typedef typename TestFixture::deque_type      deque_type;  
-    typedef typename TestFixture::const_reference const_reference;
-    typedef typename TestFixture::reference       reference;
+    typedef typename TestFixture::deque_type      deque_type;      
     typedef typename TestFixture::iterator        iterator;
 
 
@@ -619,4 +601,30 @@ TYPED_TEST(TestDeque, end) {
     iterator my_it = --x.end();
 
     ASSERT_EQ(5, *my_it);
+}
+
+TYPED_TEST(TestDeque, test_assignment) {
+    typedef typename TestFixture::deque_type      deque_type;      
+
+
+
+    deque_type x;
+    
+    x.push_front(1);
+    x.push_back(2);
+    x.push_back(3);
+    x.push_back(4);
+    x.push_back(5);
+
+    x[0] = 6;
+    x[1] = 7;
+    x[2] = 8;
+    x[3] = 9;
+    x[4] = 10;
+
+    ASSERT_EQ(10, x[4]);
+    ASSERT_EQ(9, x[3]);
+    ASSERT_EQ(8, x[2]);
+    ASSERT_EQ(7, x[1]);
+    ASSERT_EQ(6, x[0]);
 }
