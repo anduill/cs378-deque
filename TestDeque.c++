@@ -430,3 +430,31 @@ TYPED_TEST(TestDeque, insert_full) {
 
     ASSERT_EQ(21, x.size());
 }
+
+TYPED_TEST(TestDeque, combo_1) {
+    typedef typename TestFixture::deque_type      deque_type;
+    typedef typename TestFixture::iterator        iterator;
+
+    deque_type x;
+    for (int i = 0; i < 20; ++i)
+        x.push_back(1);
+
+    for (int i = 0; i < 10; ++i)
+        x.push_front(2);
+
+    x.push_front(3);
+
+    //for (int i = 0; i < 20; ++i)
+    //    x.push_front(2);
+
+
+    
+    //iterator my_it = x.begin();
+    //my_it += 10;
+    
+    //x.insert(my_it, 3);
+    //++my_it;
+    //x.erase(my_it);
+
+    ASSERT_EQ(31, x.size());
+}

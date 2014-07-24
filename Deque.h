@@ -741,8 +741,7 @@ class my_deque {
          * <your documentation>
          */
         void push_front (const_reference v) {            
-            int new_b = _b - 1;
-
+            int new_b = _b - 1;            
             if(new_b < 0)
             {
                 push_front_resize(1, v);
@@ -750,13 +749,12 @@ class my_deque {
 
             else
             {
-                size_type inner_array_number = _b / INNER_SIZE;
-                size_type inner_array_index = _b % INNER_SIZE;
+                size_type inner_array_number = new_b / INNER_SIZE;
+                size_type inner_array_index = new_b % INNER_SIZE;                
 
                 T* inner_array = arr_ptr[inner_array_number];
-                T* inner_end = inner_array + inner_array_index;
-                T* inner_position = inner_end - 1;
-                uninitialized_fill(_a, inner_position, inner_end, v);
+                T* arr_begin = inner_array + inner_array_index;                
+                uninitialized_fill(_a, arr_begin, arr_begin+1, v);
                 _b = new_b;
             }
             
