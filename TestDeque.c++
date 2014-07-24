@@ -427,8 +427,9 @@ TYPED_TEST(TestDeque, insert_full) {
     ++my_it;
 
     x.insert(my_it, 4);
+    x.insert(my_it, 5);
 
-    ASSERT_EQ(21, x.size());
+    ASSERT_EQ(22, x.size());
 }
 
 TYPED_TEST(TestDeque, combo_1) {
@@ -576,4 +577,46 @@ TYPED_TEST(TestDeque, const_equals_1) {
     reference _x = x.at(0);
 
     ASSERT_EQ(_x,_y);
+}
+
+TYPED_TEST(TestDeque, const_equals_2) {
+    typedef typename TestFixture::deque_type      deque_type;  
+    typedef typename TestFixture::const_reference const_reference;
+    typedef typename TestFixture::reference       reference;
+
+
+    deque_type x;
+    
+    x.push_front(1);
+    x.push_back(2);
+    x.push_back(3);
+    x.push_back(4);
+    x.push_back(5);
+
+    const deque_type y(x);
+    const_reference _y = y.back();
+    reference _x = x.back();
+
+    ASSERT_EQ(_x,_y);
+}
+
+TYPED_TEST(TestDeque, end) {
+    typedef typename TestFixture::deque_type      deque_type;  
+    typedef typename TestFixture::const_reference const_reference;
+    typedef typename TestFixture::reference       reference;
+    typedef typename TestFixture::iterator        iterator;
+
+
+
+    deque_type x;
+    
+    x.push_front(1);
+    x.push_back(2);
+    x.push_back(3);
+    x.push_back(4);
+    x.push_back(5);
+
+    iterator my_it = --x.end();
+
+    ASSERT_EQ(5, *my_it);
 }
