@@ -681,30 +681,6 @@ class my_deque {
                 (*this).push_back(copy[i]);
             }
             
-            //size_type new_e = _e + 1 - _b;
-            
-            //leaping_fill(_a, _e, new_e, arr_ptr, v);
-          
-            //++_e;
-            //int x = size();
-         
-            // if(iterator_pos != _l)
-            // {
-            //     size_type iterator_end = _e - _b -1;
-            //     for (int i = iterator_end; i >= iterator_pos; --i)
-            //     {
-                   
-            //         (*this)[i + 1] = (*this)[i];
-            //     }
-               
-            //     (*this)[iterator_pos] = v;
-            //     _e = iterator_end + 1 + _b;
-                
-            // }
-            // else{
-            //     this->push_back(v);
-            // }            
-            // assert(valid());
             return iter;
         }
         

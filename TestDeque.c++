@@ -80,7 +80,7 @@ typedef testing::Types<
 
 TYPED_TEST_CASE(TestDeque, my_types);
 
-/*TYPED_TEST(TestDeque, Empty) {
+TYPED_TEST(TestDeque, Empty) {
     typedef typename TestFixture::deque_type      deque_type;
     typedef typename TestFixture::allocator_type  allocator_type;
     typedef typename TestFixture::value_type      value_type;
@@ -336,7 +336,7 @@ TYPED_TEST(TestDeque, iterator_insert) {
       cout << x[i] << endl;
 
     ASSERT_EQ(5, x.size());
-}*/
+}
 
 TYPED_TEST(TestDeque, iterator_erase) {
     typedef typename TestFixture::deque_type      deque_type;
