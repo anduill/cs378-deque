@@ -213,7 +213,7 @@ class my_deque {
                 iterator (my_deque* p, size_type curr) {
                     _deque = p;
                     current_location = curr;                    
-                    if(current_location >= p->_b && current_location < p->_e){
+                    if(current_location >= p->_b && current_location <= p->_e){
                         valid_iterator = true;
                     }                    
                     else{
@@ -618,14 +618,25 @@ class my_deque {
             return const_iterator(/* <your arguments> */);
         }
         
+        size_type get_current_location(iterator& iter)
+        {
+            return iter.current_location;
+        }
 
         /**
          * <your documentation>
          */
-        iterator erase (iterator) {
+        iterator erase (iterator iter) {
             // <your code>
+            size_type iterator_pos = get_current_location(iter) - _b;
+
+            for (int i = iterator_pos; i < size() - 1; ++i)
+            {
+                (*this)[i] = (*this)[i+1];
+            }
+            resize(size() -1);
             assert(valid());
-            return iterator();
+            return iter;
         }
         
 
@@ -643,36 +654,57 @@ class my_deque {
             return const_cast<my_deque*>(this)->front();
         }
         
-        size_type get_current_location(iterator& iter)
-        {
-            return iter.current_location;
-        }
+  
         /**
          * <your documentation>
          */
         iterator insert (iterator iter, const_reference v) {
             //AT THE MOMENT, ASSUMING NOT FULL
-            size_type iterator_pos = get_current_location(iter) - _b;
-            cout << "iterator_pos :" << iterator_pos << endl;
-            ++_e;
-            cout << "_e : " << _e - _b << endl;
-            if(iterator_pos != _l)
+            if (empty())
             {
-                size_type iterator_end = _e - _b;
-                for (int i = iterator_end; i >= iterator_pos; --i)
-                {
-                    cout << "IN LOOP" << endl;
-                    cout << "i : " << i << endl;
-                    //(*this)[i + 1] = (*this)[i];
-                }
-                cout << "OUT OF LOOP" << endl;
-                (*this)[iterator_pos] = v;
-                _e = iterator_end + 2;
+                (*this).push_back(v);
+                return (*this).begin();
             }
-            else{
-                this->push_back(v);
-            }            
-            assert(valid());
+            size_type iterator_pos = get_current_location(iter) - _b;
+
+
+            my_deque copy;
+            for (int i = iterator_pos; i < size(); ++i)
+            {
+                copy.push_back((*this)[i]);
+            }
+
+            resize(iterator_pos, v);
+            (*this).push_back(v);
+            for (int i = 0; i < copy.size(); ++i)
+            {
+                (*this).push_back(copy[i]);
+            }
+            
+            //size_type new_e = _e + 1 - _b;
+            
+            //leaping_fill(_a, _e, new_e, arr_ptr, v);
+          
+            //++_e;
+            //int x = size();
+         
+            // if(iterator_pos != _l)
+            // {
+            //     size_type iterator_end = _e - _b -1;
+            //     for (int i = iterator_end; i >= iterator_pos; --i)
+            //     {
+                   
+            //         (*this)[i + 1] = (*this)[i];
+            //     }
+               
+            //     (*this)[iterator_pos] = v;
+            //     _e = iterator_end + 1 + _b;
+                
+            // }
+            // else{
+            //     this->push_back(v);
+            // }            
+            // assert(valid());
             return iter;
         }
         

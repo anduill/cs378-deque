@@ -53,7 +53,8 @@ To obtain coverage of the test:
 // ---------
 
 template <typename D>
-struct TestDeque : testing::Test {
+struct TestDeque : testing::Test 
+{
     // --------
     // typedefs
     // --------
@@ -66,17 +67,20 @@ struct TestDeque : testing::Test {
     typedef typename D::pointer         pointer;
     typedef typename D::const_pointer   const_pointer;
     typedef typename D::reference       reference;
-    typedef typename D::const_reference const_reference;};
+    typedef typename D::const_reference const_reference;
+    typedef typename D::iterator        iterator;
+};
 
 typedef testing::Types<
             std::deque<int>,
             std::deque<double>,
-            my_deque<int> >
+            my_deque<int>,
+            my_deque<double> >
         my_types;
 
 TYPED_TEST_CASE(TestDeque, my_types);
 
-TYPED_TEST(TestDeque, Empty) {
+/*TYPED_TEST(TestDeque, Empty) {
     typedef typename TestFixture::deque_type      deque_type;
     typedef typename TestFixture::allocator_type  allocator_type;
     typedef typename TestFixture::value_type      value_type;
@@ -301,4 +305,65 @@ TYPED_TEST(TestDeque, clear) {
     ASSERT_EQ(4, x.size());
     ASSERT_EQ(1, x.front());
     ASSERT_EQ(4, x.back());
+}
+
+TYPED_TEST(TestDeque, iterator_insert) {
+    typedef typename TestFixture::deque_type      deque_type;
+    typedef typename TestFixture::allocator_type  allocator_type;
+    typedef typename TestFixture::value_type      value_type;
+    typedef typename TestFixture::size_type       size_type;
+    typedef typename TestFixture::difference_type difference_type;
+    typedef typename TestFixture::pointer         pointer;
+    typedef typename TestFixture::const_pointer   const_pointer;
+    typedef typename TestFixture::reference       reference;
+    typedef typename TestFixture::const_reference const_reference;
+    typedef typename TestFixture::iterator        iterator;
+
+    deque_type x;
+
+    x.push_back(2);
+    x.push_front(1);
+    x.push_back(3);
+    x.push_back(4);
+
+    iterator my_it = x.begin();
+
+    ++my_it;
+    ++my_it;
+    x.insert(my_it, 5);
+
+    for (int i = 0; i < x.size(); ++i)
+      cout << x[i] << endl;
+
+    ASSERT_EQ(5, x.size());
+}*/
+
+TYPED_TEST(TestDeque, iterator_erase) {
+    typedef typename TestFixture::deque_type      deque_type;
+    typedef typename TestFixture::allocator_type  allocator_type;
+    typedef typename TestFixture::value_type      value_type;
+    typedef typename TestFixture::size_type       size_type;
+    typedef typename TestFixture::difference_type difference_type;
+    typedef typename TestFixture::pointer         pointer;
+    typedef typename TestFixture::const_pointer   const_pointer;
+    typedef typename TestFixture::reference       reference;
+    typedef typename TestFixture::const_reference const_reference;
+    typedef typename TestFixture::iterator        iterator;
+
+    deque_type x;
+    
+    x.push_back(2);
+    x.push_front(1);
+    x.push_back(3);
+    x.push_back(4);
+    x.push_back(5);
+
+    iterator my_it = x.begin();
+
+    ++my_it;
+    ++my_it;
+    x.erase(my_it);
+    for (int i = 0; i < x.size(); ++i)
+      cout << x[i] << endl;
+    ASSERT_EQ(4, x.size());
 }
