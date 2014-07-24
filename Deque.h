@@ -112,18 +112,15 @@ class my_deque {
          * <your documentation>
          */
         friend bool operator == (const my_deque& lhs, const my_deque& rhs) {
-            // <your code>
-            // you must use std::equal()
-            return true;}
+            return (lhs.size() == rhs.size()) && std::equal(lhs.begin(), lhs.end(), rhs.begin());        
+        }
         
 
         /**
          * <your documentation>
          */
-        friend bool operator < (const my_deque& lhs, const my_deque& rhs) {
-            // <your code>
-            // you must use std::lexicographical_compare()
-            return true;
+        friend bool operator < (const my_deque& lhs, const my_deque& rhs) {            
+            return std::lexicographical_compare(lhs.begin(), lhs.end(), rhs.begin(), rhs.end());            
         }
 
     private:        
@@ -211,7 +208,7 @@ class my_deque {
                 iterator (my_deque* p, size_type curr) {
                     _deque = p;
                     current_location = curr;                    
-                    if(current_location >= p->_b && current_location < p->_e){
+                    if(current_location >= p->_b && current_location <= p->_e){
                         valid_iterator = true;
                     }                    
                     else{
@@ -312,8 +309,9 @@ class my_deque {
                  * <your documentation>
                  */
                 friend bool operator == (const const_iterator& lhs, const const_iterator& rhs) {
-                    // <your code>
-                    return true;}
+                    
+                    return lhs.iter == rhs.iter;
+                }
 
                 /**
                  * <your documentation>
@@ -336,26 +334,21 @@ class my_deque {
                     return lhs -= rhs;}
 
             private:
-                // ----
-                // data
-                // ----
-
-                // <your data>
+                iterator iter;
 
             private:                
 
                 bool valid () const {
                     // <your code>
-                    return true;}
+                    return true;
+                }
 
             public:                
 
                 /**
                  * <your documentation>
                  */
-                const_iterator (/* <your arguments> */) {
-                    // <your code>
-                    assert(valid());}
+                const_iterator ( iterator _iter) : iter (_iter) {}
 
                 // Default copy, destructor, and copy assignment.
                 // const_iterator (const const_iterator&);
@@ -367,10 +360,7 @@ class my_deque {
                  * <your documentation>
                  */
                 reference operator * () const {
-                    // <your code>
-                    // dummy is just to be able to compile the skeleton, remove it
-                    static value_type dummy;
-                    return dummy;
+                    return *iter;                    
                 }
             
 
@@ -386,9 +376,8 @@ class my_deque {
                  * <your documentation>
                  */
                 const_iterator& operator ++ () {
-                    // <your code>
-                    assert(valid());
-                    return *this;
+                    ++iter;
+                    return *this;                    
                 }
 
                 /**
@@ -396,8 +385,7 @@ class my_deque {
                  */
                 const_iterator operator ++ (int) {
                     const_iterator x = *this;
-                    ++(*this);
-                    assert(valid());
+                    ++iter;
                     return x;
                 }
 
@@ -406,9 +394,8 @@ class my_deque {
                  * <your documentation>
                  */
                 const_iterator& operator -- () {
-                    // <your code>
-                    assert(valid());
-                    return *this;
+                    --iter;                    
+                    return *this;            
                 }
 
                 /**
@@ -416,8 +403,7 @@ class my_deque {
                  */
                 const_iterator operator -- (int) {
                     const_iterator x = *this;
-                    --(*this);
-                    assert(valid());
+                    --iter;
                     return x;
                 }
                 
@@ -425,9 +411,8 @@ class my_deque {
                 /**
                  * <your documentation>
                  */
-                const_iterator& operator += (difference_type) {
-                    // <your code>
-                    assert(valid());
+                const_iterator& operator += (difference_type d) {
+                    iter += d;
                     return *this;
                 }
                 
@@ -435,9 +420,8 @@ class my_deque {
                 /**
                  * <your documentation>
                  */
-                const_iterator& operator -= (difference_type) {
-                    // <your code>
-                    assert(valid());
+                const_iterator& operator -= (difference_type d) {
+                    iter -= d;
                     return *this;
                 }
             };
@@ -577,8 +561,12 @@ class my_deque {
          * <your documentation>
          */
         const_iterator begin () const {
-            // <your code>
-            return const_iterator(/* <your arguments> */);
+            
+            const my_deque* const temp_p = this;
+            my_deque* uncasted = (my_deque*) temp_p;
+            size_type temp_b = _b;
+            iterator temp(uncasted, temp_b);
+            return const_iterator(temp);
         }
         
 
@@ -614,8 +602,12 @@ class my_deque {
          * <your documentation>
          */
         const_iterator end () const {
-            // <your code>
-            return const_iterator(/* <your arguments> */);
+            
+            const my_deque* const temp_p = this;
+            my_deque* uncasted = (my_deque*) temp_p;
+            size_type temp_e = _e;
+            iterator temp(uncasted,temp_e);
+            return const_iterator(temp);
         }
         
 
@@ -926,8 +918,32 @@ class my_deque {
         /**
          * <your documentation>
          */
-        void swap (my_deque&) {
-            // <your code>
+        void swap (my_deque& that) {
+            if(_a == that._a){
+                T** temp = arr_ptr;
+                arr_ptr = that.arr_ptr;
+                that.arr_ptr = temp;
+                size_type temp_b = _b;
+                size_type temp_e = _e;
+                size_type temp_l = _l;
+                _b = that._b;
+                _e = that._e;
+                _l = that._l;
+                that._b = temp_b;
+                that._e = temp_e;
+                that._l = temp_l;
+                size_type temp_number_of_arrays = number_of_arrays;
+                bool temp_new_empty_deque = new_empty_deque;
+                number_of_arrays = that.number_of_arrays;
+                new_empty_deque = that.new_empty_deque;
+                that.number_of_arrays = temp_number_of_arrays;
+                that.new_empty_deque = temp_new_empty_deque;
+            }
+            else{
+                my_deque temp_deque(*this);
+                *this = that;
+                that = temp_deque;
+            }            
             assert(valid());}};
 
 #endif // Deque_h

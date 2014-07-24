@@ -285,3 +285,67 @@ TYPED_TEST(TestDeque, constructor_2) {
         ASSERT_EQ(10,x[i]);
     }
 }
+TYPED_TEST(TestDeque, test_swap_1) {
+    typedef typename TestFixture::deque_type      deque_type;
+
+    deque_type x;
+    x.push_front(2);
+    x.push_back(3);
+    x.push_back(4);
+    x.push_front(1);
+    
+    deque_type y;
+    for(int i = 0; i < 10; ++i){
+        y.push_back(i);
+    }
+    deque_type x_copy(x);
+    deque_type y_copy(y);
+    ASSERT_TRUE(x == x_copy);
+    ASSERT_TRUE(y == y_copy);
+    x.swap(y);
+    ASSERT_TRUE(y == x_copy);
+    ASSERT_TRUE(x == y_copy);
+    x.swap(y);
+    ASSERT_TRUE(x == x_copy);
+    ASSERT_TRUE(y == y_copy);
+}
+TYPED_TEST(TestDeque, test_swap_2) {
+    typedef typename TestFixture::deque_type      deque_type;
+
+    deque_type x;
+    x.push_front(2);
+    x.push_back(3);
+    x.push_back(4);
+    x.push_front(1);
+    
+    deque_type y;
+    for(int i = 0; i < 10; ++i){
+        y.push_back(i);
+    }
+    deque_type x_copy(x);
+    deque_type y_copy(y);
+    ASSERT_TRUE(x == x_copy);
+    ASSERT_TRUE(y == y_copy);
+    x.swap(y);
+    ASSERT_TRUE(y == x_copy);
+    ASSERT_TRUE(x == y_copy);
+    x.swap(y);
+    ASSERT_TRUE(x == x_copy);
+    ASSERT_TRUE(y == y_copy);
+}
+TYPED_TEST(TestDeque, test_less_than) {
+    typedef typename TestFixture::deque_type      deque_type;
+
+    deque_type x;
+    x.push_front(2);
+    x.push_back(3);
+    x.push_back(4);
+    x.push_front(1);
+    
+    deque_type y;
+    for(int i = 0; i < 10; ++i){
+        y.push_back(i);
+    }
+
+    ASSERT_TRUE(y < x);
+}
