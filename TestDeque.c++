@@ -442,19 +442,138 @@ TYPED_TEST(TestDeque, combo_1) {
     for (int i = 0; i < 10; ++i)
         x.push_front(2);
 
-    x.push_front(3);
-
-    //for (int i = 0; i < 20; ++i)
-    //    x.push_front(2);
+    for (int i = 0; i < 20; ++i)
+        x.push_front(2);
 
 
     
-    //iterator my_it = x.begin();
-    //my_it += 10;
+    iterator my_it = x.begin();
+    my_it += 10;
     
-    //x.insert(my_it, 3);
-    //++my_it;
-    //x.erase(my_it);
+    x.insert(my_it, 3);
+    ++my_it;
+    x.erase(my_it);
 
-    ASSERT_EQ(31, x.size());
+    ASSERT_EQ(50, x.size());
+    ASSERT_EQ(3, x[10]);
+}
+
+TYPED_TEST(TestDeque, test_greater_than) {
+    typedef typename TestFixture::deque_type      deque_type;
+
+    deque_type x;
+    x.push_front(2);
+    x.push_back(3);
+    x.push_back(4);
+    x.push_front(1);
+    
+    deque_type y;
+    for(int i = 0; i < 10; ++i){
+        y.push_back(i);
+    }
+
+    y.push_front(5);
+
+    ASSERT_TRUE(y > x);
+}
+
+TYPED_TEST(TestDeque, test_swap_3) {
+    typedef typename TestFixture::deque_type      deque_type;
+
+    deque_type x;
+    x.push_front(2);
+    x.push_back(3);
+    x.push_back(4);
+    x.push_front(1);
+    
+    deque_type y;
+    for(int i = 0; i < 10; ++i){
+        y.push_back(i);
+    }
+
+    deque_type z;
+    for (int i = 0; i < 4; ++i)
+    {
+        z.push_back(i+5);
+    }
+
+    deque_type x_copy(x);
+    deque_type y_copy(y);
+    deque_type z_copy(z);
+    
+    x.swap(y);
+    x.swap(z);
+
+    ASSERT_TRUE(z == y_copy);
+    ASSERT_TRUE(x == z_copy);
+}
+
+TYPED_TEST(TestDeque, test_swap_not_equals) {
+    typedef typename TestFixture::deque_type      deque_type;
+
+    deque_type x;
+    x.push_front(2);
+    x.push_back(3);
+    x.push_back(4);
+    x.push_front(1);
+    
+    deque_type y;
+    for(int i = 0; i < 10; ++i){
+        y.push_back(i);
+    }
+
+    deque_type z;
+    for (int i = 0; i < 4; ++i)
+    {
+        z.push_back(i+5);
+    }
+
+    deque_type x_copy(x);
+    deque_type y_copy(y);
+    deque_type z_copy(z);
+    
+    x.swap(y);
+    x.swap(z);
+
+    ASSERT_TRUE(z != z_copy);
+    ASSERT_TRUE(x != x_copy);
+}
+
+TYPED_TEST(TestDeque, at) {
+    typedef typename TestFixture::deque_type      deque_type;
+    typedef typename TestFixture::const_reference const_reference;
+
+
+    deque_type x;
+    
+    x.push_back(2);
+    x.push_front(1);
+    x.push_back(3);
+    x.push_back(4);
+    x.push_back(5);
+
+    const_reference y = x.at(2);
+
+    ASSERT_EQ(3,y);
+}
+
+TYPED_TEST(TestDeque, const_equals_1) {
+    typedef typename TestFixture::deque_type      deque_type;  
+    typedef typename TestFixture::const_reference const_reference;
+    typedef typename TestFixture::reference       reference;
+
+
+    deque_type x;
+    
+    x.push_front(1);
+    x.push_back(2);
+    x.push_back(3);
+    x.push_back(4);
+    x.push_back(5);
+
+    const deque_type y(x);
+    const_reference _y = y.at(0);
+    reference _x = x.at(0);
+
+    ASSERT_EQ(_x,_y);
 }

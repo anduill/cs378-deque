@@ -528,13 +528,14 @@ class my_deque {
          */
         reference at (size_type index) {
             
-            return *this[index];
+            return (*this)[index];
         }
 
         /**
          * <your documentation>
          */
         const_reference at (size_type index) const {
+            
             return const_cast<my_deque*>(this)->at(index);
         }
         
