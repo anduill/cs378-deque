@@ -96,12 +96,16 @@ class my_deque {
 
         typedef A                                        allocator_type;
         typedef typename allocator_type::value_type      value_type;
+        typedef typename std::allocator_traits<allocator_type>::template rebind_alloc<T*> outer_alloc_type;
 
         typedef typename allocator_type::size_type       size_type;
         typedef typename allocator_type::difference_type difference_type;
+        typedef typename outer_alloc_type::size_type     outer_size_type;
+        typedef typename outer_alloc_type::difference_type outer_difference_type;
 
         typedef typename allocator_type::pointer         pointer;
         typedef typename allocator_type::const_pointer   const_pointer;
+        typedef typename outer_alloc_type::pointer       outer_pointer;
 
         typedef typename allocator_type::reference       reference;
         typedef typename allocator_type::const_reference const_reference;
@@ -126,7 +130,7 @@ class my_deque {
     private:        
 
         allocator_type _a;
-        std::allocator<T*> outer;
+        outer_alloc_type _o;        
         T** arr_ptr;
         size_type _l;        
         size_type _b;
@@ -137,8 +141,16 @@ class my_deque {
     private:        
 
         bool valid () const {
-            // <your code>
+            
             return true;
+        }
+        void Construct(const allocator_type& a, const outer_alloc_type& o) {
+            _a = a;
+            _o = o;
+            arr_ptr = 0;
+            _b = _e = number_of_arrays = _l = 0;
+            new_empty_deque = true;
+            assert(valid());
         }
 
     public:        
@@ -199,7 +211,7 @@ class my_deque {
             private:                
 
                 bool valid () const {
-                    // <your code>
+                    
                     return valid_iterator;
                 }
 
@@ -348,6 +360,7 @@ class my_deque {
                     return true;
                 }
 
+
             public:                
 
                 /**
@@ -438,8 +451,11 @@ class my_deque {
         /**
          * <your documentation>
          */
-        explicit my_deque (const allocator_type& a = allocator_type()) : _a (a)
-        {            
+        explicit my_deque (const allocator_type& a = allocator_type())
+        {                        
+            Construct(a,outer_alloc_type());
+        }
+        explicit my_deque (const allocator_type& a, const outer_alloc_type& o = outer_alloc_type()) : _a(a), _o(o){
             arr_ptr = 0;
             _b = _e = number_of_arrays = _l = 0;
             new_empty_deque = true;
@@ -457,6 +473,7 @@ class my_deque {
             this->resize(s,v);
             assert(valid());
         }
+
 
         /**
          * <your documentation>
@@ -659,7 +676,7 @@ class my_deque {
          * <your documentation>
          */
         iterator insert (iterator iter, const_reference v) {
-            //AT THE MOMENT, ASSUMING NOT FULL
+            
             if (empty())
             {
                 (*this).push_back(v);
@@ -772,7 +789,7 @@ class my_deque {
             size_type one_sided_num_arrs = std::max(num_new_arrs, 2 * number_of_arrays);
             num_new_arrs = 2*one_sided_num_arrs + number_of_arrays;
 
-            T** new_arr_ptr = outer.allocate(num_new_arrs);
+            T** new_arr_ptr = _o.allocate(num_new_arrs);
             for(int i = 0; i < one_sided_num_arrs; ++i)
             {
                 T* temp = _a.allocate(INNER_SIZE);
@@ -795,7 +812,7 @@ class my_deque {
             leaping_fill(_a, new_b, old_b, new_arr_ptr, v);
             
             if(arr_ptr != 0){
-                outer.destroy(arr_ptr);
+                _o.destroy(arr_ptr);
             }                
             arr_ptr = new_arr_ptr;
             number_of_arrays = num_new_arrs;
@@ -898,7 +915,7 @@ class my_deque {
                 size_type one_sided_num_arrs = std::max(num_new_arrs, 2 * number_of_arrays);
                 num_new_arrs = 2*one_sided_num_arrs + number_of_arrays;
 
-                T** new_arr_ptr = outer.allocate(num_new_arrs);
+                T** new_arr_ptr = _o.allocate(num_new_arrs);
                 
                 for(int i = 0; i < one_sided_num_arrs; ++i)
                 {                   
@@ -918,9 +935,8 @@ class my_deque {
                     new_arr_ptr[i] = temp;   
                 }
 
-                if(arr_ptr != 0){
-                    //delete[] arr_ptr;
-                    outer.destroy(arr_ptr);
+                if(arr_ptr != 0){                    
+                    _o.destroy(arr_ptr);
                 }                
                 arr_ptr = new_arr_ptr;
                 number_of_arrays = num_new_arrs;
