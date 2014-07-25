@@ -815,6 +815,7 @@ class my_deque {
             
             if(arr_ptr != 0){
                 _o.destroy(arr_ptr);
+                _o.deallocate(arr_ptr,number_of_arrays);
             }                
             arr_ptr = new_arr_ptr;
             number_of_arrays = num_new_arrs;
@@ -946,6 +947,7 @@ class my_deque {
 
                 if(arr_ptr != 0){                    
                     _o.destroy(arr_ptr);
+                    _o.deallocate(arr_ptr,number_of_arrays);
                 }                
                 arr_ptr = new_arr_ptr;
                 number_of_arrays = num_new_arrs;
