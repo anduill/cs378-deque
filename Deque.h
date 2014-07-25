@@ -694,7 +694,6 @@ class my_deque {
                 copy.push_back((*this)[i]);
             }
 
-
             resize(iterator_pos, v);
             (*this).push_back(v);
             for (int i = 0; i < copy.size(); ++i)
@@ -702,6 +701,7 @@ class my_deque {
                 (*this).push_back(copy[i]);
             }
             
+            iter = begin() + iterator_pos;
             return iter;
         }
         
@@ -738,10 +738,12 @@ class my_deque {
          */
         void push_back (const_reference v)
         {            
+
             size_type new_e = _e + 1;
             
             if(new_e > _l)
-            {                
+            {    
+
                 resize(size() + 1, v);
                 
             }
@@ -894,6 +896,7 @@ class my_deque {
         void resize (size_type s, const_reference v = value_type()) {            
             
             size_type special_e = s + _b;
+
             if(s == size()){
                 return;
             }
@@ -905,9 +908,15 @@ class my_deque {
             }            
             else if(special_e <= _l){                
                 
-                leaping_fill(_a, _e, special_e, arr_ptr, v);                
+                size_type new_e_diff = s - size();                                
+                leaping_fill(_a, _e, special_e, arr_ptr, v);
+                _e = _e + new_e_diff;
+                
             }
             else{
+                
+                size_type new_e_diff = s - size();                
+                
                 size_type size_needed = special_e - _l;
                 size_type num_new_arrs = size_needed / INNER_SIZE + 1;
 
@@ -948,10 +957,10 @@ class my_deque {
                 }
                 else{
                     _b = _b + one_sided_num_arrs * INNER_SIZE;
-                    _e = _e + one_sided_num_arrs * INNER_SIZE + size_needed;
-                }
-
+                    _e = _e + one_sided_num_arrs * INNER_SIZE + new_e_diff;
+                }                
                 leaping_fill(_a, _e - size_needed, _e, arr_ptr, v);
+                
             }
             
             assert(valid());
