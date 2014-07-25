@@ -701,9 +701,9 @@ TYPED_TEST(TestDeque, huge_deque) {
     size_type start = 20;
     deque_type x;
 
-    for (int i = 0; i < 420; ++i)
+    for (int i = 0; i < 1400; ++i)
         x.push_back(9);
     
 
-    ASSERT_EQ(1,1);
+    ASSERT_EQ(1400,x.size());
 }

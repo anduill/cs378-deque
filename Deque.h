@@ -670,8 +670,7 @@ class my_deque {
             size_type iterator_pos = get_current_location(iter) - _b;
 
 
-            my_deque copy(size() - iterator_pos, v);
-            copy.clear();
+            my_deque copy;            
 
             for (int i = iterator_pos; i < size(); ++i)
             {
