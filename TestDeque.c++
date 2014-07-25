@@ -554,6 +554,47 @@ TYPED_TEST(TestDeque, at) {
     ASSERT_EQ(3,y);
 }
 
+TYPED_TEST(TestDeque, at_change) {
+    typedef typename TestFixture::deque_type      deque_type;
+    typedef typename TestFixture::const_reference const_reference;
+    typedef typename TestFixture::reference       reference;
+
+    deque_type x;
+    
+    x.push_back(2);
+    x.push_front(1);
+    x.push_back(3);
+    x.push_back(4);
+    x.push_back(5);
+
+    reference y = x.at(2);
+    y = 10;
+
+    ASSERT_EQ(10,x.at(2));
+}
+
+TYPED_TEST(TestDeque, at_change_1) {
+    typedef typename TestFixture::deque_type      deque_type;
+    typedef typename TestFixture::const_reference const_reference;
+    typedef typename TestFixture::reference       reference;
+
+    deque_type x;
+    
+    x.push_back(2);
+    x.push_front(1);
+    x.push_back(3);
+    x.push_back(4);
+    x.push_back(5);
+
+    reference y = x.at(2);
+
+    reference z = y;
+    x.resize(100);
+    y = 10;
+
+    ASSERT_EQ(10,z);
+}
+
 TYPED_TEST(TestDeque, const_equals_1) {
     typedef typename TestFixture::deque_type      deque_type;  
     typedef typename TestFixture::const_reference const_reference;
