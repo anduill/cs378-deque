@@ -685,3 +685,25 @@ TYPED_TEST(TestDeque, test_assignment) {
     ASSERT_EQ(7, x[1]);
     ASSERT_EQ(6, x[0]);
 }
+
+/*TYPED_TEST(TestDeque, huge_deque) {
+    typedef typename TestFixture::deque_type      deque_type;
+    typedef typename TestFixture::allocator_type  allocator_type;
+    typedef typename TestFixture::value_type      value_type;
+    typedef typename TestFixture::size_type       size_type;
+    typedef typename TestFixture::difference_type difference_type;
+    typedef typename TestFixture::pointer         pointer;
+    typedef typename TestFixture::const_pointer   const_pointer;
+    typedef typename TestFixture::reference       reference;
+    typedef typename TestFixture::const_reference const_reference;   
+
+
+    size_type start = 20;
+    deque_type x(20);
+
+    for (int i = 0; i < 1420; ++i)
+        x.push_back(9);
+    
+
+    ASSERT_EQ(1440, x.size());
+}*/
