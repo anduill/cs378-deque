@@ -501,7 +501,7 @@ class my_deque {
                 _a.deallocate(temp,10);
                 
             }
-            delete[] arr_ptr;
+            _o.deallocate(arr_ptr,number_of_arrays);
             assert(valid());
         }        
 
