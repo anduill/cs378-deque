@@ -1,3 +1,9 @@
+commit 5db6eb103fe98a9120cbce08605a426eba00a2fd
+Author: David Garcia <anduill@yahoo.com>
+Date:   Fri Jul 25 14:35:14 2014 -0500
+
+    added doxyfile and html dir
+
 commit 94b9a84fca9bd0636082315dce07e915a9fc82f3
 Author: David Garcia <anduill@yahoo.com>
 Date:   Fri Jul 25 14:17:13 2014 -0500
