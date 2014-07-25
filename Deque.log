@@ -1,0 +1,267 @@
+commit 94b9a84fca9bd0636082315dce07e915a9fc82f3
+Author: David Garcia <anduill@yahoo.com>
+Date:   Fri Jul 25 14:17:13 2014 -0500
+
+    adding TestDeque.out
+
+commit f284350d5883a291fb3245db8d2b6c57ec9ec3c5
+Author: David Garcia <anduill@yahoo.com>
+Date:   Fri Jul 25 02:36:32 2014 -0500
+
+    adding .out file
+
+commit a03003d3d112cb9a40fa9a78fa6a9a167e27d068
+Author: David Garcia <anduill@yahoo.com>
+Date:   Fri Jul 25 02:17:56 2014 -0500
+
+    removed delete from destructor
+
+commit 7a47a3332ec66a5e84be97290f96907f70bd3b78
+Author: David Garcia <anduill@yahoo.com>
+Date:   Fri Jul 25 02:14:02 2014 -0500
+
+    fixed memory leak by using deallocate
+
+commit ee1a75801bb0ce1a0ecb2396d4823d5f0c44c43d
+Author: David Garcia <anduill@yahoo.com>
+Date:   Fri Jul 25 01:28:52 2014 -0500
+
+    added another at reference test
+
+commit 792b60c26a114422015f78e39e4f870cddd29107
+Author: David Garcia <anduill@yahoo.com>
+Date:   Fri Jul 25 01:22:02 2014 -0500
+
+    added a bunch of tests and fixed a couple more bugs
+
+commit 2f4708d5088d9b02280cf9e500032c511040478f
+Author: David Garcia <anduill@yahoo.com>
+Date:   Thu Jul 24 21:42:40 2014 -0500
+
+    removed unnecessary typedefs from tests
+
+commit cd2b0c09a162ae8c167987fce3dd5fb0cc65b5c8
+Author: David Garcia <anduill@yahoo.com>
+Date:   Thu Jul 24 21:35:12 2014 -0500
+
+    put in genericized T* allocator
+
+commit bea18ce2066571b097adbdb55b632d0057a3a225
+Merge: d41927f 9893637
+Author: Martin Eischeid <martye@cs.utexas.edu>
+Date:   Thu Jul 24 21:32:51 2014 -0500
+
+    Merge branch 'master' of https://github.com/anduill/cs378-deque
+
+commit d41927f5b7d990660f84ed4700c233097b77c95f
+Author: Martin Eischeid <martye@cs.utexas.edu>
+Date:   Thu Jul 24 21:32:14 2014 -0500
+
+    More tests
+
+commit 9893637ab302d6721e2d75a3d5501f3f6e7b56de
+Author: David Garcia <anduill@yahoo.com>
+Date:   Thu Jul 24 20:57:41 2014 -0500
+
+    removed some comments
+
+commit 664f1bd91eb35c38bf426b08e7236f18da31d1a9
+Author: David Garcia <anduill@yahoo.com>
+Date:   Thu Jul 24 20:37:12 2014 -0500
+
+    removed unnecessary copy from insert
+
+commit 0fffe4c2994e6989bc742354b83decd1763b5af4
+Author: David Garcia <anduill@yahoo.com>
+Date:   Thu Jul 24 20:31:54 2014 -0500
+
+    fixed bad allocation bug
+
+commit cbd54f171ba9003c4d3e9affa0fe0dfaf8a6dd2f
+Author: Martin Eischeid <martye@cs.utexas.edu>
+Date:   Thu Jul 24 19:41:58 2014 -0500
+
+    Allocator instead of new
+
+commit c0599ef9e5cfa5b6edea164cff1746f1a9a0aa8b
+Author: Martin Eischeid <martye@cs.utexas.edu>
+Date:   Thu Jul 24 18:57:15 2014 -0500
+
+    Fixed insert bug
+
+commit cf2b9518da177663be49679c020cd1d7c5478460
+Author: David Garcia <anduill@yahoo.com>
+Date:   Wed Jul 23 23:51:46 2014 -0500
+
+    added assignment test case
+
+commit 97025eef0735a365f8086f0fd7e08bd677fce9dd
+Author: Martin Eischeid <martye@cs.utexas.edu>
+Date:   Wed Jul 23 22:26:08 2014 -0500
+
+    even more tests
+
+commit c478befbfe6e2de10e80d86af59fb65fc43e40fb
+Author: Martin Eischeid <martye@cs.utexas.edu>
+Date:   Wed Jul 23 22:06:50 2014 -0500
+
+    fixed at() bug
+
+commit 5b2d8e7cfda0d672f356183d453563ec7439747c
+Author: Martin Eischeid <martye@cs.utexas.edu>
+Date:   Wed Jul 23 21:42:30 2014 -0500
+
+    fixed push_front bug
+
+commit c7b7aca0288ebc4fdcdcedab97963329cb9b1c59
+Author: Martin Eischeid <martye@cs.utexas.edu>
+Date:   Wed Jul 23 20:38:56 2014 -0500
+
+    Some more tests
+
+commit 56c55f36c0fe76936e8d264667ac5a2a9070cb0d
+Merge: 65e87fd bf512d5
+Author: anduill <anduill@yahoo.com>
+Date:   Wed Jul 23 20:23:13 2014 -0500
+
+    Merge pull request #9 from anduill/master_merge
+    
+    Master merge
+
+commit bf512d512540ca7c8754a5bb463f3afb45d883bd
+Author: David Garcia <anduill@yahoo.com>
+Date:   Wed Jul 23 20:20:31 2014 -0500
+
+    merged and removed cout's
+
+commit afd2f4e97161f4f0f8a9fbf737755a6361d3e4ce
+Author: David Garcia <anduill@yahoo.com>
+Date:   Wed Jul 23 20:06:05 2014 -0500
+
+    finished const_iterator
+
+commit 18c34ef3eaae63d5c8345c7ddd5cf172172ae552
+Author: David Garcia <anduill@yahoo.com>
+Date:   Wed Jul 23 01:31:45 2014 -0500
+
+    finished basic iterator
+
+commit fa330e9c6797237a31b583ca591a830199c443b1
+Author: David Garcia <anduill@yahoo.com>
+Date:   Wed Jul 23 01:15:56 2014 -0500
+
+    adding some more tests and finishing iterator work
+
+commit 91cc2c599d32f9f0a85d827f9d2117ccf97c4868
+Author: David Garcia <anduill@yahoo.com>
+Date:   Wed Jul 23 00:55:13 2014 -0500
+
+    added equals and some other constructors
+
+commit 65e87fd3266f1332ced7cd84f1e78b4278f54d57
+Author: Martin Eischeid <martye@cs.utexas.edu>
+Date:   Wed Jul 23 20:04:14 2014 -0500
+
+    Fixed comments
+
+commit 64e79ffa7fb24bdc3ac5a63235bb6e051768b239
+Author: Martin Eischeid <martye@cs.utexas.edu>
+Date:   Wed Jul 23 20:01:06 2014 -0500
+
+    Insert and Erase somewhat implemented
+
+commit d740fe3620d5104e3ac2265d4fb7a632434fff40
+Author: Martin Eischeid <martye@cs.utexas.edu>
+Date:   Wed Jul 23 01:15:52 2014 -0500
+
+    MARTY: insert is looking promising :)
+
+commit 6ec8a468e6df2ed30d434580e73e576aaa0c8e97
+Author: David Garcia <anduill@yahoo.com>
+Date:   Tue Jul 22 23:19:10 2014 -0500
+
+    starting insert
+
+commit 6da38ece006980d937310eec5a545fe207e4f52e
+Author: David Garcia <anduill@yahoo.com>
+Date:   Tue Jul 22 22:43:18 2014 -0500
+
+    finished clear
+
+commit a490f16ef1400e55ddcc58d18cbbbd8c3ef755bc
+Author: David Garcia <anduill@yahoo.com>
+Date:   Tue Jul 22 22:34:37 2014 -0500
+
+    finished smaller resize
+
+commit ce5704a4f3ea19ef8bd6bdb88342c0cec2b9187e
+Author: David Garcia <anduill@yahoo.com>
+Date:   Tue Jul 22 22:27:38 2014 -0500
+
+    fixed pop_front bug
+
+commit 2057e5d5e9c16df4b159b94c8a99fc094ea55468
+Author: David Garcia <anduill@yahoo.com>
+Date:   Tue Jul 22 20:33:06 2014 -0500
+
+    fixed push_front and maybe push_back
+
+commit 4a642f995c0ade6223017298d079de278337a696
+Author: Martin Eischeid <martye@cs.utexas.edu>
+Date:   Tue Jul 22 18:43:57 2014 -0500
+
+    simplistic push_front test
+
+commit a8a84eadda3704683fd04e93afc06ab66de98a29
+Author: Martin Eischeid <martye@cs.utexas.edu>
+Date:   Tue Jul 22 17:48:28 2014 -0500
+
+    push_front implemented
+
+commit b9bd3cb8847d6a812341eaf68ad4ab37666daad5
+Author: David Garcia <anduill@yahoo.com>
+Date:   Tue Jul 22 00:25:37 2014 -0500
+
+    starting iterator implementation
+
+commit 8d83ca33400e0f6b4a3dee967a8a5c42d04b4ecb
+Author: Martin Eischeid <martye@cs.utexas.edu>
+Date:   Mon Jul 21 22:45:20 2014 -0500
+
+    push_back appears to work
+
+commit 82287f0013ad7f899a92c3f9925f023f4c40775f
+Author: Martin Eischeid <martye@cs.utexas.edu>
+Date:   Mon Jul 21 21:29:23 2014 -0500
+
+    implemented leaping_fill to do fill operation across multiple arrays
+
+commit 7a47defac03faef205bf2d7f187650f5fd09cad9
+Author: Martin Eischeid <martye@cs.utexas.edu>
+Date:   Mon Jul 21 20:21:59 2014 -0500
+
+    Started Push-back
+
+commit fa71be0fc868b195de77e092779835c5d9aa3af8
+Author: David Garcia <anduill@yahoo.com>
+Date:   Mon Jul 21 02:23:40 2014 -0500
+
+    first attempt at both initializing memory and deallocating memory
+
+commit 12543169bc497f2cec95bdb0a9ee71f8572f66e7
+Author: David Garcia <anduill@yahoo.com>
+Date:   Mon Jul 21 01:39:01 2014 -0500
+
+    filling out constructor for deque
+
+commit 4359dc33dbd4dfd01f2e9fdace8f466286ca0073
+Author: David Garcia <anduill@yahoo.com>
+Date:   Sun Jul 20 22:01:05 2014 -0500
+
+    added makefile and all of deque class/test files
+
+commit 0d0235a4be62e3ac3e05d103dc842eca2dde1a5c
+Author: David Garcia <anduill@yahoo.com>
+Date:   Sun Jul 20 21:46:33 2014 -0500
+
+    adding basic .gitignore
