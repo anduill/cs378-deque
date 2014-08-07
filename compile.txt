@@ -1,0 +1,97 @@
+TestDeque.c++: In instantiation of ‘void TestDeque_pop_front_and_back_Test<gtest_TypeParam_>::TestBody() [with gtest_TypeParam_ = my_deque<double>]’:
+TestDeque.c++:1788:1:   required from here
+TestDeque.c++:791:18: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+TestDeque.c++: In instantiation of ‘void TestDeque_pop_front_Test<gtest_TypeParam_>::TestBody() [with gtest_TypeParam_ = my_deque<double>]’:
+TestDeque.c++:1788:1:   required from here
+TestDeque.c++:206:9: warning: unused variable ‘e’ [-Wunused-variable]
+TestDeque.c++: In instantiation of ‘void TestDeque_pop_front_and_back_Test<gtest_TypeParam_>::TestBody() [with gtest_TypeParam_ = my_deque<int>]’:
+TestDeque.c++:1788:1:   required from here
+TestDeque.c++:791:18: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+TestDeque.c++: In instantiation of ‘void TestDeque_pop_front_Test<gtest_TypeParam_>::TestBody() [with gtest_TypeParam_ = my_deque<int>]’:
+TestDeque.c++:1788:1:   required from here
+TestDeque.c++:206:9: warning: unused variable ‘e’ [-Wunused-variable]
+TestDeque.c++: In instantiation of ‘void TestDeque_pop_front_and_back_Test<gtest_TypeParam_>::TestBody() [with gtest_TypeParam_ = std::deque<double>]’:
+TestDeque.c++:1788:1:   required from here
+TestDeque.c++:791:18: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+TestDeque.c++: In instantiation of ‘void TestDeque_pop_front_Test<gtest_TypeParam_>::TestBody() [with gtest_TypeParam_ = std::deque<double>]’:
+TestDeque.c++:1788:1:   required from here
+TestDeque.c++:206:9: warning: unused variable ‘e’ [-Wunused-variable]
+TestDeque.c++: In instantiation of ‘void TestDeque_pop_front_and_back_Test<gtest_TypeParam_>::TestBody() [with gtest_TypeParam_ = std::deque<int>]’:
+TestDeque.c++:1788:1:   required from here
+TestDeque.c++:791:18: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+TestDeque.c++: In instantiation of ‘void TestDeque_pop_front_Test<gtest_TypeParam_>::TestBody() [with gtest_TypeParam_ = std::deque<int>]’:
+TestDeque.c++:1788:1:   required from here
+TestDeque.c++:206:9: warning: unused variable ‘e’ [-Wunused-variable]
+In file included from TestDeque.c++:49:0:
+Deque.h: In instantiation of ‘my_deque<T, A>::~my_deque() [with T = double; A = std::allocator<double>]’:
+TestDeque.c++:1781:16:   required from ‘void TestDeque_erase_6_Test<gtest_TypeParam_>::TestBody() [with gtest_TypeParam_ = my_deque<double>]’
+TestDeque.c++:1788:1:   required from here
+Deque.h:498:25: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+Deque.h: In instantiation of ‘my_deque<T, A>::iterator my_deque<T, A>::erase(my_deque<T, A>::iterator) [with T = double; A = std::allocator<double>]’:
+TestDeque.c++:1785:5:   required from ‘void TestDeque_erase_6_Test<gtest_TypeParam_>::TestBody() [with gtest_TypeParam_ = my_deque<double>]’
+TestDeque.c++:1788:1:   required from here
+Deque.h:650:26: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+Deque.h: In instantiation of ‘my_deque<T, A>::iterator my_deque<T, A>::insert(my_deque<T, A>::iterator, my_deque<T, A>::const_reference) [with T = double; A = std::allocator<double>; my_deque<T, A>::const_reference = const double&]’:
+TestDeque.c++:1773:5:   required from ‘void TestDeque_erase_5_Test<gtest_TypeParam_>::TestBody() [with gtest_TypeParam_ = my_deque<double>]’
+TestDeque.c++:1788:1:   required from here
+Deque.h:692:26: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+Deque.h:699:26: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+Deque.h: In instantiation of ‘void my_deque<T, A>::resize(my_deque<T, A>::size_type, my_deque<T, A>::const_reference) [with T = double; A = std::allocator<double>; my_deque<T, A>::size_type = long unsigned int; my_deque<T, A>::const_reference = const double&]’:
+TestDeque.c++:1626:5:   required from ‘void TestDeque_resize_5_Test<gtest_TypeParam_>::TestBody() [with gtest_TypeParam_ = my_deque<double>]’
+TestDeque.c++:1788:1:   required from here
+Deque.h:930:29: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+Deque.h:937:29: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+Deque.h:942:50: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+Deque.h: In instantiation of ‘my_deque<T, A>::~my_deque() [with T = int; A = std::allocator<int>]’:
+TestDeque.c++:1781:16:   required from ‘void TestDeque_erase_6_Test<gtest_TypeParam_>::TestBody() [with gtest_TypeParam_ = my_deque<int>]’
+TestDeque.c++:1788:1:   required from here
+Deque.h:498:25: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+Deque.h: In instantiation of ‘my_deque<T, A>::iterator my_deque<T, A>::erase(my_deque<T, A>::iterator) [with T = int; A = std::allocator<int>]’:
+TestDeque.c++:1785:5:   required from ‘void TestDeque_erase_6_Test<gtest_TypeParam_>::TestBody() [with gtest_TypeParam_ = my_deque<int>]’
+TestDeque.c++:1788:1:   required from here
+Deque.h:650:26: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+Deque.h: In instantiation of ‘my_deque<T, A>::iterator my_deque<T, A>::insert(my_deque<T, A>::iterator, my_deque<T, A>::const_reference) [with T = int; A = std::allocator<int>; my_deque<T, A>::const_reference = const int&]’:
+TestDeque.c++:1773:5:   required from ‘void TestDeque_erase_5_Test<gtest_TypeParam_>::TestBody() [with gtest_TypeParam_ = my_deque<int>]’
+TestDeque.c++:1788:1:   required from here
+Deque.h:692:26: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+Deque.h:699:26: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+Deque.h: In instantiation of ‘void my_deque<T, A>::resize(my_deque<T, A>::size_type, my_deque<T, A>::const_reference) [with T = int; A = std::allocator<int>; my_deque<T, A>::size_type = long unsigned int; my_deque<T, A>::const_reference = const int&]’:
+TestDeque.c++:1626:5:   required from ‘void TestDeque_resize_5_Test<gtest_TypeParam_>::TestBody() [with gtest_TypeParam_ = my_deque<int>]’
+TestDeque.c++:1788:1:   required from here
+Deque.h:930:29: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+Deque.h:937:29: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+Deque.h:942:50: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+Deque.h: In instantiation of ‘void my_deque<T, A>::push_front_resize(my_deque<T, A>::size_type, my_deque<T, A>::const_reference) [with T = double; A = std::allocator<double>; my_deque<T, A>::size_type = long unsigned int; my_deque<T, A>::const_reference = const double&]’:
+Deque.h:772:17:   required from ‘void my_deque<T, A>::push_front(my_deque<T, A>::const_reference) [with T = double; A = std::allocator<double>; my_deque<T, A>::const_reference = const double&]’
+TestDeque.c++:1782:5:   required from ‘void TestDeque_erase_6_Test<gtest_TypeParam_>::TestBody() [with gtest_TypeParam_ = my_deque<double>]’
+TestDeque.c++:1788:1:   required from here
+Deque.h:795:25: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+Deque.h:801:25: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+Deque.h:806:46: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+Deque.h: In instantiation of ‘void my_deque<T, A>::leaping_destroy(A&, my_deque<T, A>::size_type, my_deque<T, A>::size_type, T**) [with T = double; A = std::allocator<double>; my_deque<T, A>::size_type = long unsigned int]’:
+Deque.h:729:17:   required from ‘void my_deque<T, A>::pop_front() [with T = double; A = std::allocator<double>]’
+TestDeque.c++:1771:5:   required from ‘void TestDeque_erase_5_Test<gtest_TypeParam_>::TestBody() [with gtest_TypeParam_ = my_deque<double>]’
+TestDeque.c++:1788:1:   required from here
+Deque.h:853:37: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+Deque.h: In instantiation of ‘void my_deque<T, A>::leaping_fill(A&, my_deque<T, A>::size_type, my_deque<T, A>::size_type, T**, const value_type&) [with T = double; A = std::allocator<double>; my_deque<T, A>::size_type = long unsigned int; my_deque<T, A>::value_type = double]’:
+Deque.h:913:17:   required from ‘void my_deque<T, A>::resize(my_deque<T, A>::size_type, my_deque<T, A>::const_reference) [with T = double; A = std::allocator<double>; my_deque<T, A>::size_type = long unsigned int; my_deque<T, A>::const_reference = const double&]’
+TestDeque.c++:1626:5:   required from ‘void TestDeque_resize_5_Test<gtest_TypeParam_>::TestBody() [with gtest_TypeParam_ = my_deque<double>]’
+TestDeque.c++:1788:1:   required from here
+Deque.h:883:37: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+Deque.h: In instantiation of ‘void my_deque<T, A>::push_front_resize(my_deque<T, A>::size_type, my_deque<T, A>::const_reference) [with T = int; A = std::allocator<int>; my_deque<T, A>::size_type = long unsigned int; my_deque<T, A>::const_reference = const int&]’:
+Deque.h:772:17:   required from ‘void my_deque<T, A>::push_front(my_deque<T, A>::const_reference) [with T = int; A = std::allocator<int>; my_deque<T, A>::const_reference = const int&]’
+TestDeque.c++:1782:5:   required from ‘void TestDeque_erase_6_Test<gtest_TypeParam_>::TestBody() [with gtest_TypeParam_ = my_deque<int>]’
+TestDeque.c++:1788:1:   required from here
+Deque.h:795:25: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+Deque.h:801:25: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+Deque.h:806:46: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+Deque.h: In instantiation of ‘void my_deque<T, A>::leaping_destroy(A&, my_deque<T, A>::size_type, my_deque<T, A>::size_type, T**) [with T = int; A = std::allocator<int>; my_deque<T, A>::size_type = long unsigned int]’:
+Deque.h:729:17:   required from ‘void my_deque<T, A>::pop_front() [with T = int; A = std::allocator<int>]’
+TestDeque.c++:1771:5:   required from ‘void TestDeque_erase_5_Test<gtest_TypeParam_>::TestBody() [with gtest_TypeParam_ = my_deque<int>]’
+TestDeque.c++:1788:1:   required from here
+Deque.h:853:37: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+Deque.h: In instantiation of ‘void my_deque<T, A>::leaping_fill(A&, my_deque<T, A>::size_type, my_deque<T, A>::size_type, T**, const value_type&) [with T = int; A = std::allocator<int>; my_deque<T, A>::size_type = long unsigned int; my_deque<T, A>::value_type = int]’:
+Deque.h:913:17:   required from ‘void my_deque<T, A>::resize(my_deque<T, A>::size_type, my_deque<T, A>::const_reference) [with T = int; A = std::allocator<int>; my_deque<T, A>::size_type = long unsigned int; my_deque<T, A>::const_reference = const int&]’
+TestDeque.c++:1626:5:   required from ‘void TestDeque_resize_5_Test<gtest_TypeParam_>::TestBody() [with gtest_TypeParam_ = my_deque<int>]’
+TestDeque.c++:1788:1:   required from here
+Deque.h:883:37: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
